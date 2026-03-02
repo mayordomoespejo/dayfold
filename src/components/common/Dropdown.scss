@@ -1,0 +1,134 @@
+.dropdown {
+  position: relative;
+  // Grid-stack trick: sizer and trigger share cell 1/1, so the container
+  // is always as wide as the longest option — no layout shifts.
+  display: inline-grid;
+
+  &__sizer {
+    grid-area: 1 / 1;
+    visibility: hidden;
+    pointer-events: none;
+    white-space: nowrap;
+    // Match trigger's padding (left: space-3, right: space-3 + gap space-2 + chevron 14px)
+    padding: 0 calc(var(--space-3) + var(--space-2) + 14px) 0 var(--space-3);
+    height: 36px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    align-items: center;
+  }
+
+  &__trigger {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    height: 36px;
+    padding: 0 var(--space-3);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      border-color var(--transition-fast),
+      background var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-primary);
+      background: var(--color-surface-hover);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      border-color: var(--color-primary);
+    }
+  }
+
+  &--open &__trigger {
+    border-color: var(--color-primary);
+    background: var(--color-surface-hover);
+    color: var(--color-primary);
+  }
+
+  &__trigger-label {
+    flex: 1;
+    text-align: left;
+  }
+
+  &__chevron {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
+  }
+
+  &--open &__chevron {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  // ── Menu ──────────────────────────────────────────────────────────────────
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    list-style: none;
+    padding: var(--space-1) 0;
+    z-index: var(--z-above);
+    max-height: 240px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    text-align: left;
+    font-family: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      background: var(--color-primary-muted);
+      color: var(--color-primary);
+    }
+
+    &--selected {
+      color: var(--color-primary);
+      font-weight: var(--font-weight-semibold);
+      background: var(--color-primary-muted);
+    }
+  }
+
+  &__option-check {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+}

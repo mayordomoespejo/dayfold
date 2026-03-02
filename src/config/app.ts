@@ -6,5 +6,5 @@ export const APP_CONFIG = {
   titleSeparator: '·',
   themeStorageKey: 'cl_theme',
   languageStorageKey: 'cl_lang',
-  wikimediaBaseUrl: 'https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/events',
+  wikimediaApiBase: 'https://api.wikimedia.org/feed/v1/wikipedia',
 } as const

@@ -1,30 +1,66 @@
-.event-card-skeleton {
+.skeleton {
+  display: block;
+  border-radius: var(--radius-sm);
+  @include skeleton;
+}
+
+// ── Orbit ────────────────────────────────────────────────────────────────────
+
+.wheel-skeleton__orbit {
+  background: none !important;
+  @include skeleton;
+  border-width: 2px;
+
+  .theme-dark & {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ── Spoke bars ───────────────────────────────────────────────────────────────
+// Applied ON TOP of .timeline-wheel__year / .timeline-wheel__text
+// to add the shimmer without touching column width, text-align or flex order.
+
+.wheel-skeleton__bar {
+  height: 0.9em;   // relative to the real element's font-size
+  display: block;
+  white-space: normal;
+}
+
+.wheel-skeleton__spoke {
+  cursor: default;
+}
+
+// ── Detail card ──────────────────────────────────────────────────────────────
+
+.wheel-skeleton__detail {
+  pointer-events: none;
+}
+
+// Applied on top of .timeline-detail__eyebrow and .timeline-detail__year.
+// height: 1em resolves relative to each element's own font-size,
+// so the bar is exactly as tall as the real text line.
+.wheel-skeleton__inline {
+  display: block;
+  height: 1em;
+  margin: 0;
+}
+
+// Description lines — font-size-base height
+.wheel-skeleton__lines {
   display: flex;
-  gap: var(--space-4);
-  padding: var(--space-5) 0;
+  flex-direction: column;
+  gap: var(--space-2);
+}
 
-  &__dot {
-    width: 12px;
-    height: 12px;
-    border-radius: var(--radius-full);
-    background: var(--color-bg-alt);
-    flex-shrink: 0;
-    margin-top: 6px;
-    @include skeleton;
-  }
+.wheel-skeleton__text-line {
+  height: var(--font-size-base);
+  border-radius: var(--radius-sm);
+}
 
-  &__body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  &__date {
-    margin-bottom: var(--space-1);
-  }
-
-  &__title {
-    margin-bottom: var(--space-1);
-  }
+// Image placeholder — inherits border-radius (16px) from .timeline-detail__image
+.wheel-skeleton__img {
+  display: block;
+  height: 160px;
+  width: 100%;
+  justify-self: stretch;
 }

@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "TOGGLE_THEME": "Temayı değiştir",
+    "LANGUAGE_SELECT": "İçerik dilini seç"
+  },
+  "TIMELINE": {
+    "TITLE": "Tarihte bugün",
+    "NO_EVENTS": "Bu tarih için olay bulunamadı.",
+    "WIKIPEDIA": "Vikipedi",
+    "ARIA_LABEL": "Tarihi olaylar zaman çizelgesi",
+    "IMAGE_ALT": "{{year}}: {{text}}"
+  },
+  "DATE": {
+    "MONTH": "Ay",
+    "DAY": "Gün",
+    "TODAY": "Bugün",
+    "APPLY": "Uygula",
+    "MONTHS": {
+      "JANUARY": "Ocak",
+      "FEBRUARY": "Şubat",
+      "MARCH": "Mart",
+      "APRIL": "Nisan",
+      "MAY": "Mayıs",
+      "JUNE": "Haziran",
+      "JULY": "Temmuz",
+      "AUGUST": "Ağustos",
+      "SEPTEMBER": "Eylül",
+      "OCTOBER": "Ekim",
+      "NOVEMBER": "Kasım",
+      "DECEMBER": "Aralık"
+    }
+  },
+  "LANGUAGES": {
+    "AR": "العربية",
+    "DE": "Deutsch",
+    "EN": "English",
+    "ES": "Español",
+    "FR": "Français",
+    "IT": "Italiano",
+    "PT": "Português",
+    "SV": "Svenska",
+    "TR": "Türkçe",
+    "UK": "Українська",
+    "ZH": "中文"
+  },
+  "COMMON": {
+    "LOADING": "Yükleniyor…",
+    "ERROR": "Bir şeyler ters gitti.",
+    "RETRY": "Tekrar dene"
+  }
+}

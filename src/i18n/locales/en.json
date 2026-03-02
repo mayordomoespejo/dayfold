@@ -1,16 +1,47 @@
 {
   "HEADER": {
-    "TOGGLE_THEME": "Toggle theme"
+    "TOGGLE_THEME": "Toggle theme",
+    "LANGUAGE_SELECT": "Select content language"
   },
   "TIMELINE": {
     "TITLE": "On This Day in History",
     "NO_EVENTS": "No events found for this date.",
-    "WIKIPEDIA": "Wikipedia"
+    "WIKIPEDIA": "Wikipedia",
+    "ARIA_LABEL": "Historical events timeline",
+    "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
     "MONTH": "Month",
     "DAY": "Day",
-    "TODAY": "Today"
+    "TODAY": "Today",
+    "APPLY": "Apply",
+    "MONTHS": {
+      "JANUARY": "January",
+      "FEBRUARY": "February",
+      "MARCH": "March",
+      "APRIL": "April",
+      "MAY": "May",
+      "JUNE": "June",
+      "JULY": "July",
+      "AUGUST": "August",
+      "SEPTEMBER": "September",
+      "OCTOBER": "October",
+      "NOVEMBER": "November",
+      "DECEMBER": "December"
+    }
+  },
+  "LANGUAGES": {
+    "AR": "العربية",
+    "DE": "Deutsch",
+    "EN": "English",
+    "ES": "Español",
+    "FR": "Français",
+    "IT": "Italiano",
+    "PT": "Português",
+    "SV": "Svenska",
+    "TR": "Türkçe",
+    "UK": "Українська",
+    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Loading…",

@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "TOGGLE_THEME": "Cambia tema",
+    "LANGUAGE_SELECT": "Seleziona la lingua dei contenuti"
+  },
+  "TIMELINE": {
+    "TITLE": "Oggi nella storia",
+    "NO_EVENTS": "Nessun evento trovato per questa data.",
+    "WIKIPEDIA": "Wikipedia",
+    "ARIA_LABEL": "Cronologia degli eventi storici",
+    "IMAGE_ALT": "{{year}}: {{text}}"
+  },
+  "DATE": {
+    "MONTH": "Mese",
+    "DAY": "Giorno",
+    "TODAY": "Oggi",
+    "APPLY": "Applica",
+    "MONTHS": {
+      "JANUARY": "Gennaio",
+      "FEBRUARY": "Febbraio",
+      "MARCH": "Marzo",
+      "APRIL": "Aprile",
+      "MAY": "Maggio",
+      "JUNE": "Giugno",
+      "JULY": "Luglio",
+      "AUGUST": "Agosto",
+      "SEPTEMBER": "Settembre",
+      "OCTOBER": "Ottobre",
+      "NOVEMBER": "Novembre",
+      "DECEMBER": "Dicembre"
+    }
+  },
+  "LANGUAGES": {
+    "AR": "العربية",
+    "DE": "Deutsch",
+    "EN": "English",
+    "ES": "Español",
+    "FR": "Français",
+    "IT": "Italiano",
+    "PT": "Português",
+    "SV": "Svenska",
+    "TR": "Türkçe",
+    "UK": "Українська",
+    "ZH": "中文"
+  },
+  "COMMON": {
+    "LOADING": "Caricamento…",
+    "ERROR": "Qualcosa è andato storto.",
+    "RETRY": "Riprova"
+  }
+}

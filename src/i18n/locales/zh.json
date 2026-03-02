@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "TOGGLE_THEME": "切换主题",
+    "LANGUAGE_SELECT": "选择内容语言"
+  },
+  "TIMELINE": {
+    "TITLE": "历史上的今天",
+    "NO_EVENTS": "未找到此日期的事件。",
+    "WIKIPEDIA": "维基百科",
+    "ARIA_LABEL": "历史事件时间线",
+    "IMAGE_ALT": "{{year}}：{{text}}"
+  },
+  "DATE": {
+    "MONTH": "月份",
+    "DAY": "日期",
+    "TODAY": "今天",
+    "APPLY": "确认",
+    "MONTHS": {
+      "JANUARY": "一月",
+      "FEBRUARY": "二月",
+      "MARCH": "三月",
+      "APRIL": "四月",
+      "MAY": "五月",
+      "JUNE": "六月",
+      "JULY": "七月",
+      "AUGUST": "八月",
+      "SEPTEMBER": "九月",
+      "OCTOBER": "十月",
+      "NOVEMBER": "十一月",
+      "DECEMBER": "十二月"
+    }
+  },
+  "LANGUAGES": {
+    "AR": "العربية",
+    "DE": "Deutsch",
+    "EN": "English",
+    "ES": "Español",
+    "FR": "Français",
+    "IT": "Italiano",
+    "PT": "Português",
+    "SV": "Svenska",
+    "TR": "Türkçe",
+    "UK": "Українська",
+    "ZH": "中文"
+  },
+  "COMMON": {
+    "LOADING": "加载中…",
+    "ERROR": "出了点问题。",
+    "RETRY": "重试"
+  }
+}

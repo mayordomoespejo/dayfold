@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "TOGGLE_THEME": "Växla tema",
+    "LANGUAGE_SELECT": "Välj innehållsspråk"
+  },
+  "TIMELINE": {
+    "TITLE": "Idag i historien",
+    "NO_EVENTS": "Inga händelser hittades för detta datum.",
+    "WIKIPEDIA": "Wikipedia",
+    "ARIA_LABEL": "Tidslinje över historiska händelser",
+    "IMAGE_ALT": "{{year}}: {{text}}"
+  },
+  "DATE": {
+    "MONTH": "Månad",
+    "DAY": "Dag",
+    "TODAY": "Idag",
+    "APPLY": "Tillämpa",
+    "MONTHS": {
+      "JANUARY": "Januari",
+      "FEBRUARY": "Februari",
+      "MARCH": "Mars",
+      "APRIL": "April",
+      "MAY": "Maj",
+      "JUNE": "Juni",
+      "JULY": "Juli",
+      "AUGUST": "Augusti",
+      "SEPTEMBER": "September",
+      "OCTOBER": "Oktober",
+      "NOVEMBER": "November",
+      "DECEMBER": "December"
+    }
+  },
+  "LANGUAGES": {
+    "AR": "العربية",
+    "DE": "Deutsch",
+    "EN": "English",
+    "ES": "Español",
+    "FR": "Français",
+    "IT": "Italiano",
+    "PT": "Português",
+    "SV": "Svenska",
+    "TR": "Türkçe",
+    "UK": "Українська",
+    "ZH": "中文"
+  },
+  "COMMON": {
+    "LOADING": "Laddar…",
+    "ERROR": "Något gick fel.",
+    "RETRY": "Försök igen"
+  }
+}

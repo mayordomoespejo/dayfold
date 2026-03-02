@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "TOGGLE_THEME": "Змінити тему",
+    "LANGUAGE_SELECT": "Вибрати мову вмісту"
+  },
+  "TIMELINE": {
+    "TITLE": "Сьогодні в історії",
+    "NO_EVENTS": "Для цієї дати подій не знайдено.",
+    "WIKIPEDIA": "Вікіпедія",
+    "ARIA_LABEL": "Хронологія історичних подій",
+    "IMAGE_ALT": "{{year}}: {{text}}"
+  },
+  "DATE": {
+    "MONTH": "Місяць",
+    "DAY": "День",
+    "TODAY": "Сьогодні",
+    "APPLY": "Застосувати",
+    "MONTHS": {
+      "JANUARY": "Січень",
+      "FEBRUARY": "Лютий",
+      "MARCH": "Березень",
+      "APRIL": "Квітень",
+      "MAY": "Травень",
+      "JUNE": "Червень",
+      "JULY": "Липень",
+      "AUGUST": "Серпень",
+      "SEPTEMBER": "Вересень",
+      "OCTOBER": "Жовтень",
+      "NOVEMBER": "Листопад",
+      "DECEMBER": "Грудень"
+    }
+  },
+  "LANGUAGES": {
+    "AR": "العربية",
+    "DE": "Deutsch",
+    "EN": "English",
+    "ES": "Español",
+    "FR": "Français",
+    "IT": "Italiano",
+    "PT": "Português",
+    "SV": "Svenska",
+    "TR": "Türkçe",
+    "UK": "Українська",
+    "ZH": "中文"
+  },
+  "COMMON": {
+    "LOADING": "Завантаження…",
+    "ERROR": "Щось пішло не так.",
+    "RETRY": "Спробувати ще раз"
+  }
+}
