@@ -71,10 +71,10 @@
   }
 
   &__today {
-    width: 52px;
+    min-width: 52px;
     height: 36px;
-    padding: 0;
-    display: flex;
+    padding: 0 var(--space-3);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;

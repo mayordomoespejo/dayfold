@@ -110,10 +110,11 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
 
       setRotationOffset(progress * maxRotation)
 
-      // Don't snap while auto-rotating — snap would fight the animation
+      // Don't snap while auto-rotating — snap would fight the animation.
+      // 350 ms lets mobile momentum inertia fully settle before snapping.
       if (!autoRotateActiveRef.current) {
         if (snapTimerRef.current) clearTimeout(snapTimerRef.current)
-        snapTimerRef.current = setTimeout(snapToNearest, 150)
+        snapTimerRef.current = setTimeout(snapToNearest, 350)
       }
     }
 
@@ -156,6 +157,21 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
     }
   }, [events.length])
 
+  // ── Touch: stop auto-rotate on any finger contact ──────────────────────────
+  // Handles the case where the user starts scrolling from outside the wheel
+  // (e.g. the detail card), so pointerdown on the wheel never fires.
+
+  useEffect(() => {
+    const onTouchStart = () => {
+      if (autoRotateActiveRef.current) {
+        autoRotateActiveRef.current = false
+        setIsAutoPlaying(false)
+      }
+    }
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    return () => window.removeEventListener('touchstart', onTouchStart)
+  }, [])
+
   // ── Auto-rotate idle animation ─────────────────────────────────────────────
   // Advances the wheel at AUTO_ROTATE_SPEED until the user interacts, the
   // play/pause button pauses it, or the last item is reached.
@@ -168,9 +184,18 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
 
     const maxRot = (events.length - 1) * FIXED_ANGLE_INCREMENT
 
-    // Stop on native touch scroll (mobile — not captured by pointer events)
-    const stopOnTouch = () => setIsAutoPlaying(false)
-    window.addEventListener('touchstart', stopOnTouch, { once: true, passive: true })
+    // If scroll is already at/past the end (e.g. browser restored scroll position
+    // from a previous session where auto-rotate had finished), jump back to the
+    // beginning so the animation has travel to cover.
+    const shellAtStart = shellRef.current
+    if (shellAtStart) {
+      const rect = shellAtStart.getBoundingClientRect()
+      const travel = Math.max(shellAtStart.offsetHeight - window.innerHeight, 1)
+      const shellTop = window.scrollY + rect.top
+      if (window.scrollY >= shellTop + travel - 1) {
+        window.scrollTo({ top: 0 })
+      }
+    }
 
     const tick = (timestamp: number) => {
       if (!autoRotateActiveRef.current) return
@@ -216,7 +241,6 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
     return () => {
       autoRotateActiveRef.current = false
       if (autoRafRef.current !== null) { cancelAnimationFrame(autoRafRef.current); autoRafRef.current = null }
-      window.removeEventListener('touchstart', stopOnTouch)
     }
   }, [events.length, isAutoPlaying])
 
@@ -263,6 +287,13 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
     const shell = shellRef.current
     if (!shell || maxRotation === 0) return
 
+    // Blur any focused wheel item so :focus-visible doesn't persist
+    // on items that are no longer active after the scroll.
+    const focused = document.activeElement
+    if (focused instanceof HTMLElement && (focused as HTMLElement).dataset.index !== undefined) {
+      focused.blur()
+    }
+
     // Each item has a unique linear position — no wrapping needed.
     const targetOffset = index * FIXED_ANGLE_INCREMENT
     const targetScrollTop = offsetToScrollTop(targetOffset)
@@ -274,7 +305,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
   // ── Pointer / keyboard handlers ───────────────────────────────────────────
 
   const handleWheelPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    // Stop auto-rotate on first touch/click
+    // Stop auto-rotate on any wheel interaction
     if (autoRotateActiveRef.current) {
       autoRotateActiveRef.current = false
       setIsAutoPlaying(false)
@@ -282,14 +313,21 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
 
     const itemEl = (event.target as HTMLElement).closest<HTMLElement>('[data-index]')
     pressedItemIndexRef.current = itemEl ? Number(itemEl.dataset.index) : null
-
     dragMovedRef.current = false
+
+    if (event.pointerType === 'touch') {
+      // Touch: let the browser handle native scroll with momentum.
+      // pointercancel fires if the user scrolls; pointerup fires on a tap.
+      dragStateRef.current = null
+      return
+    }
+
+    // Mouse / pen: full drag model with pointer capture
     dragStateRef.current = {
       pointerId: event.pointerId,
       startY: event.clientY,
       startRotationOffset: rotationOffset,
     }
-
     setIsDragging(true)
     event.currentTarget.setPointerCapture(event.pointerId)
   }
@@ -316,20 +354,32 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
 
   const handleWheelPointerEnd = (event: ReactPointerEvent<HTMLDivElement>) => {
     const dragState = dragStateRef.current
-    if (!dragState || dragState.pointerId !== event.pointerId) return
 
-    dragStateRef.current = null
-    event.currentTarget.releasePointerCapture(event.pointerId)
+    if (dragState) {
+      // Mouse / pen drag: verify pointerId before releasing capture
+      if (dragState.pointerId !== event.pointerId) return
+      dragStateRef.current = null
+      event.currentTarget.releasePointerCapture(event.pointerId)
+      setIsDragging(false)
+    }
+    // Touch taps also reach here (dragState is null for touch — no capture was set)
 
     if (!dragMovedRef.current && pressedItemIndexRef.current !== null) {
       scrollToActivePosition(pressedItemIndexRef.current)
     }
     pressedItemIndexRef.current = null
-    setIsDragging(false)
 
     window.setTimeout(() => {
       dragMovedRef.current = false
     }, 0)
+  }
+
+  /** Browser took over the touch gesture (native scroll) — clean up without activating items. */
+  const handleWheelPointerCancel = () => {
+    dragStateRef.current = null
+    dragMovedRef.current = false
+    pressedItemIndexRef.current = null
+    setIsDragging(false)
   }
 
   const handleWheelKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
@@ -390,7 +440,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
     <div
       className="timeline-shell"
       ref={shellRef}
-      style={{ '--shell-height': `calc(100vh + ${(events.length - 1) * SCROLL_PER_ITEM}px)` } as CSSProperties}
+      style={{ height: `calc(100vh + ${(events.length - 1) * SCROLL_PER_ITEM}px)` } as CSSProperties}
     >
       <div className="timeline-stage">
         <div className="timeline-stage__grid">
@@ -403,7 +453,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
             onPointerDown={handleWheelPointerDown}
             onPointerMove={handleWheelPointerMove}
             onPointerUp={handleWheelPointerEnd}
-            onPointerCancel={handleWheelPointerEnd}
+            onPointerCancel={handleWheelPointerCancel}
           >
             <div className="timeline-wheel__orbit" aria-hidden="true" />
 

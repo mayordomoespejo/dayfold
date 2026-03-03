@@ -16,9 +16,9 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  // Height is set dynamically via --shell-height (JS) so scroll travel
-  // scales with item count. Falls back to auto for mobile/static contexts.
-  height: var(--shell-height, auto);
+  // Height is set directly via React inline style so it overrides any media-query
+  // rules. This creates the scroll travel (shell taller than viewport) that drives
+  // the wheel rotation on all screen sizes.
 }
 
 .timeline-shell--loading {
@@ -51,6 +51,8 @@
   // Year column and gap are proportional fractions of the radius so they scale together.
   --year-col-width: clamp(72px, calc(var(--wheel-radius) * 0.176), 180px);
   --label-gap: clamp(20px, calc(var(--wheel-radius) * 0.059), 68px);
+  --wheel-center-x: -25%;
+  --wheel-center-y: 50%;
   position: relative;
   width: 100%;
   min-height: calc(100vh - var(--header-height));
@@ -58,9 +60,39 @@
   overflow: hidden;
   touch-action: none;
   cursor: grab;
-  background:
-    radial-gradient(ellipse 60% 55% at 18% 58%, var(--color-primary-muted) 0, transparent 100%),
-    linear-gradient(160deg, var(--color-bg-alt) 0%, var(--color-surface) 55%, var(--color-bg) 100%);
+  background: linear-gradient(160deg, var(--color-bg-alt) 0%, var(--color-surface) 55%, var(--color-bg) 100%);
+}
+
+.timeline-wheel::before {
+  content: '';
+  position: absolute;
+  top: var(--wheel-center-y);
+  left: var(--wheel-center-x);
+  width: calc(var(--wheel-diameter) * 1.15);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(200, 150, 62, 0.28) 0,
+    rgba(200, 150, 62, 0.18) 14%,
+    rgba(200, 150, 62, 0.08) 34%,
+    rgba(200, 150, 62, 0.03) 56%,
+    transparent 76%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.theme-dark .timeline-wheel::before {
+  background: radial-gradient(
+    circle,
+    rgba(212, 168, 80, 0.28) 0,
+    rgba(212, 168, 80, 0.18) 14%,
+    rgba(212, 168, 80, 0.08) 34%,
+    rgba(212, 168, 80, 0.03) 56%,
+    transparent 76%
+  );
 }
 
 .timeline-wheel--dragging,
@@ -113,14 +145,25 @@
   text-align: right;
 }
 
-.timeline-wheel__item:hover,
-.timeline-wheel__item:focus-visible,
-.timeline-wheel__item--active {
-  color: var(--color-primary);
+// Keyboard focus: only lift opacity — color stays neutral so non-active
+// items don't look selected.
+.timeline-wheel__item:focus-visible {
   opacity: 1 !important;
 }
 
+// Touch browsers can keep :hover latched after a tap, which makes
+// previously selected items look active on mobile. Restrict hover
+// styling to actual hover-capable fine pointers.
+@media (hover: hover) and (pointer: fine) {
+  .timeline-wheel__item:hover {
+    opacity: 1 !important;
+  }
+}
+
+// Active: full primary treatment — exclusively driven by the --active class.
 .timeline-wheel__item--active {
+  color: var(--color-primary);
+  opacity: 1 !important;
   font-weight: var(--font-weight-bold);
   filter: saturate(1.1);
 }
@@ -355,17 +398,8 @@
 }
 
 @media (max-width: 1024px) {
-  .timeline-shell {
-    --shell-height: auto;
-    height: auto;
-  }
-
-  .timeline-stage {
-    position: relative;
-    top: 0;
-    height: auto;
-    min-height: calc(100vh - var(--header-height));
-  }
+  // .timeline-shell and .timeline-stage keep their base rules (inline height + sticky)
+  // so the scroll-driven wheel works identically on tablet and desktop.
 
   .timeline-detail {
     position: absolute;
@@ -390,7 +424,14 @@
     --wheel-radius: min(80vw, 480px);
     --year-col-width: 52px;
     --label-gap: 20px;
+    --wheel-center-x: -60%;
+    --wheel-center-y: 20px;
     min-height: 580px;
+    // Allow native vertical scroll with momentum on touch devices.
+    // The browser fires pointercancel (not pointermove) for scroll gestures,
+    // so the drag model stays desktop-only while touch uses native scroll.
+    touch-action: pan-y;
+    cursor: default;
   }
 
   // Pivot = item activo. Lo situamos inmediatamente bajo la MobileDateBar.
