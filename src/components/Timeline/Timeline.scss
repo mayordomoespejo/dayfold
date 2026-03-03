@@ -129,11 +129,12 @@
   text-align: left;
   background: transparent;
   box-shadow: none;
+  // Transform is driven by JS at 60fps — no CSS transition on it or it fights the scroll
   transition:
-    transform var(--transition-base),
     opacity var(--transition-base),
     filter var(--transition-base),
     color var(--transition-base);
+  will-change: transform;
   cursor: pointer;
   transform-origin: left center;
   justify-items: start;
@@ -166,6 +167,14 @@
   opacity: 1 !important;
   font-weight: var(--font-weight-bold);
   filter: saturate(1.1);
+  // Render above sibling items so the active year is never obscured
+  z-index: 1;
+}
+
+// During active scroll or drag: cut all remaining transitions so nothing lags behind
+.timeline-wheel--scrolling .timeline-wheel__item,
+.timeline-wheel--dragging .timeline-wheel__item {
+  transition: none !important;
 }
 
 .timeline-wheel__label {
@@ -303,6 +312,10 @@
 }
 
 .timeline-detail__image-frame {
+  // Explicit placement ensures this row always lives in row 4.
+  // Without this, when imageUrl is null the actions div auto-places into the
+  // minmax(0, 1fr) row instead, creating dead whitespace between text and buttons.
+  grid-row: 4;
   min-height: 0;
   width: 100%;
   height: 100%;
@@ -320,6 +333,9 @@
 }
 
 .timeline-detail__actions {
+  // Explicit placement keeps actions in row 5 (auto) regardless of whether the
+  // image-frame div is in the DOM — row 4 (minmax(0,1fr)) collapses to 0 when empty.
+  grid-row: 5;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -457,7 +473,10 @@
   }
 
   .timeline-detail {
-    max-height: 38vh;
+    // No max-height cap: the card sizes to text content only (image is always hidden
+    // on mobile). It grows upward from bottom: space-4, covering the wheel as needed.
+    // The parent .timeline-stage has overflow: clip so it cannot escape the viewport.
+    max-height: none;
     padding: var(--space-4);
     border-radius: 16px;
   }

@@ -68,13 +68,13 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
   const dragMovedRef = useRef(false)
   const pressedItemIndexRef = useRef<number | null>(null)
   const snapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const scrollingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   // Auto-rotate idle state
   const autoRotateActiveRef = useRef(true)
   const autoRafRef = useRef<number | null>(null)
   const autoTimestampRef = useRef<number | null>(null)
   const [rotationOffset, setRotationOffset] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
-  const [isDragging, setIsDragging] = useState(false)
 
   // ── Scroll / snap / wheel-event handler ───────────────────────────────────
 
@@ -109,6 +109,14 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
       const maxRotation = (events.length - 1) * FIXED_ANGLE_INCREMENT
 
       setRotationOffset(progress * maxRotation)
+
+      // Add scrolling class directly (no React state) to suppress CSS transitions while
+      // the wheel is moving — transitions fight 60fps updates and cause jank.
+      wheelRef.current?.classList.add('timeline-wheel--scrolling')
+      if (scrollingTimerRef.current) clearTimeout(scrollingTimerRef.current)
+      scrollingTimerRef.current = setTimeout(() => {
+        wheelRef.current?.classList.remove('timeline-wheel--scrolling')
+      }, 150)
 
       // Don't snap while auto-rotating — snap would fight the animation.
       // 350 ms lets mobile momentum inertia fully settle before snapping.
@@ -154,6 +162,8 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
       window.removeEventListener('resize', handleScroll)
       window.removeEventListener('wheel', handleWheelEvent)
       if (snapTimerRef.current) clearTimeout(snapTimerRef.current)
+      if (scrollingTimerRef.current) clearTimeout(scrollingTimerRef.current)
+      wheelRef.current?.classList.remove('timeline-wheel--scrolling')
     }
   }, [events.length])
 
@@ -232,7 +242,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
         return
       }
 
-      window.scrollTo({ top: targetScrollY })
+      window.scrollTo({ top: targetScrollY, behavior: 'instant' as ScrollBehavior })
       autoRafRef.current = requestAnimationFrame(tick)
     }
 
@@ -328,7 +338,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
       startY: event.clientY,
       startRotationOffset: rotationOffset,
     }
-    setIsDragging(true)
+    wheelRef.current?.classList.add('timeline-wheel--dragging')
     event.currentTarget.setPointerCapture(event.pointerId)
   }
 
@@ -360,7 +370,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
       if (dragState.pointerId !== event.pointerId) return
       dragStateRef.current = null
       event.currentTarget.releasePointerCapture(event.pointerId)
-      setIsDragging(false)
+      wheelRef.current?.classList.remove('timeline-wheel--dragging')
     }
     // Touch taps also reach here (dragState is null for touch — no capture was set)
 
@@ -379,7 +389,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
     dragStateRef.current = null
     dragMovedRef.current = false
     pressedItemIndexRef.current = null
-    setIsDragging(false)
+    wheelRef.current?.classList.remove('timeline-wheel--dragging')
   }
 
   const handleWheelKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
@@ -446,7 +456,7 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
         <div className="timeline-stage__grid">
           <div
             ref={wheelRef}
-            className={`timeline-wheel${isDragging ? ' timeline-wheel--dragging' : ''}`}
+            className="timeline-wheel"
             aria-label={t('TIMELINE.ARIA_LABEL')}
             tabIndex={0}
             onKeyDown={handleWheelKeyDown}
