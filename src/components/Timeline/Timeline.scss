@@ -382,8 +382,7 @@
   }
 }
 
-.timeline-detail__link,
-.timeline-detail__clear {
+.timeline-detail__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -400,17 +399,12 @@
     border-color var(--transition-fast),
     background var(--transition-fast),
     color var(--transition-fast);
-}
 
-.timeline-detail__link:hover,
-.timeline-detail__clear:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  background: var(--color-primary-muted);
-}
-
-.timeline-detail__clear {
-  cursor: pointer;
+  &:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-muted);
+  }
 }
 
 @media (max-width: 1024px) {
@@ -450,9 +444,6 @@
     cursor: default;
   }
 
-  // Pivot = item activo. Lo situamos inmediatamente bajo la MobileDateBar.
-  // main tiene padding-top: header + datebar, así que el wheel empieza justo
-  // debajo de la datebar. Con top: 20px dejamos un margen visual mínimo.
   .timeline-wheel__orbit {
     top: 20px;
     left: -60%;

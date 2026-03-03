@@ -50,7 +50,7 @@
       height: 34px;
       display: block;
       transform-origin: center;
-      animation: header-brand-spin var(--ornament-spin-duration) linear infinite;
+      transform: rotate(calc(-1 * var(--wheel-rotation, 0rad)));
     }
   }
 
@@ -135,11 +135,6 @@
       @include focus-ring;
     }
   }
-}
-
-@keyframes header-brand-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
 }
 
 // ── Responsive ────────────────────────────────────────────────────────────────

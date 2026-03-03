@@ -16,6 +16,16 @@ interface Props {
   className?: string
 }
 
+/**
+ * Accessible custom select built on the WAI-ARIA listbox pattern.
+ *
+ * - Keyboard: Arrow keys navigate options, Enter/Space confirm, Escape closes,
+ *   Home/End jump to first/last option.
+ * - An invisible `dropdown__sizer` span locks the container width to the longest
+ *   option label, preventing layout shifts as the selection changes.
+ * - `onWheel` is stopped on the open menu so page scrolling doesn't accidentally
+ *   change the selected item when the user scrolls past the dropdown.
+ */
 export function Dropdown({ value, options, onChange, ariaLabel, className = '' }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(() => Math.max(0, options.findIndex((option) => option.value === value)))

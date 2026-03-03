@@ -1,14 +1,17 @@
+// The global .skeleton class (main.scss) provides background, border-radius and
+// the skeleton-pulse animation. This local override adds display: block so the
+// shimmer bars behave as block elements regardless of their tag.
 .skeleton {
   display: block;
-  border-radius: var(--radius-sm);
-  @include skeleton;
 }
 
 // ── Orbit ────────────────────────────────────────────────────────────────────
 
+// The orbit circle is a border-only element — override the solid background so
+// only the border shimmers, then re-apply the animation directly.
 .wheel-skeleton__orbit {
   background: none !important;
-  @include skeleton;
+  animation: skeleton-pulse 1.5s ease infinite;
   border-width: 2px;
 
   .theme-dark & {

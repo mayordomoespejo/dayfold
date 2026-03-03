@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "Select content language"
   },
   "TIMELINE": {
-    "TITLE": "On This Day in History",
     "TITLE_RELATIVE": "{{label}} in History",
     "TITLE_DATE": "{{month}} {{day}} in History",
     "NO_EVENTS": "No events found for this date.",
     "WIKIPEDIA": "Wikipedia",
     "ARIA_LABEL": "Historical events timeline",
+    "PLAY": "Resume",
+    "PAUSE": "Pause",
     "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "November",
       "DECEMBER": "December"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Loading…",

@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "Välj innehållsspråk"
   },
   "TIMELINE": {
-    "TITLE": "Idag i historien",
     "TITLE_RELATIVE": "{{label}} i historien",
     "TITLE_DATE": "{{day}} {{month}} i historien",
     "NO_EVENTS": "Inga händelser hittades för detta datum.",
     "WIKIPEDIA": "Wikipedia",
     "ARIA_LABEL": "Tidslinje över historiska händelser",
+    "PLAY": "Återuppta",
+    "PAUSE": "Pausa",
     "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "November",
       "DECEMBER": "December"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Laddar…",

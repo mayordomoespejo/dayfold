@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { CalendarDate } from '@/types'
 import { clampDay, getDaysInMonth, getTodayDate } from '@/utils/date'
@@ -55,11 +55,6 @@ export function DateSelector({ month, day, onChange, compact = false }: Props) {
     if (isTodaySelected) return
     onChange(getTodayDate())
   }
-
-  useEffect(() => {
-    setLocalMonth(month)
-    setLocalDay(day)
-  }, [day, month])
 
   return (
     <div className={`date-selector${compact ? ' date-selector--compact' : ''}`}>

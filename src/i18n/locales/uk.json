@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "Вибрати мову вмісту"
   },
   "TIMELINE": {
-    "TITLE": "Сьогодні в історії",
     "TITLE_RELATIVE": "{{label}} в історії",
     "TITLE_DATE": "{{day}} {{month}} в історії",
     "NO_EVENTS": "Для цієї дати подій не знайдено.",
     "WIKIPEDIA": "Вікіпедія",
     "ARIA_LABEL": "Хронологія історичних подій",
+    "PLAY": "Продовжити",
+    "PAUSE": "Пауза",
     "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "Листопад",
       "DECEMBER": "Грудень"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Завантаження…",

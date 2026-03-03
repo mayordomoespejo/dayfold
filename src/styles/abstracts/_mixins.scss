@@ -43,18 +43,3 @@ $bp-lg: 1024px;
   justify-content: center;
 }
 
-@mixin skeleton {
-  background: var(--color-bg-alt);
-  border-radius: var(--radius-sm);
-  animation: skeleton-pulse 1.5s ease infinite;
-
-  @keyframes skeleton-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-}

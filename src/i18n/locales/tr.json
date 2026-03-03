@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "İçerik dilini seç"
   },
   "TIMELINE": {
-    "TITLE": "Tarihte bugün",
     "TITLE_RELATIVE": "Tarihte {{label}}",
     "TITLE_DATE": "Tarihte {{day}} {{month}}",
     "NO_EVENTS": "Bu tarih için olay bulunamadı.",
     "WIKIPEDIA": "Vikipedi",
     "ARIA_LABEL": "Tarihi olaylar zaman çizelgesi",
+    "PLAY": "Devam et",
+    "PAUSE": "Duraklat",
     "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "Kasım",
       "DECEMBER": "Aralık"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Yükleniyor…",

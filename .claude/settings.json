@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm install axios @tanstack/react-query react-router-dom react-i18next i18next i18next-browser-languagedetector @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities sass)",
       "Bash(npm install -D prettier eslint-config-prettier)",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(wc -l /Users/Miguel/Documents/developer/CenturyLens/src/i18n/locales/*.json)",
+      "Bash(npm run lint)",
+      "Bash(npx eslint src --max-warnings=100)",
+      "Bash(npx eslint src)"
     ],
     "additionalDirectories": [
       "/Users/Miguel/.claude/projects/-Users-Miguel-Documents-developer-CenturyLens",

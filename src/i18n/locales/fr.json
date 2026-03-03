@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "Sélectionner la langue du contenu"
   },
   "TIMELINE": {
-    "TITLE": "Aujourd'hui dans l'histoire",
     "TITLE_RELATIVE": "{{label}} dans l'histoire",
     "TITLE_DATE": "{{day}} {{month}} dans l'histoire",
     "NO_EVENTS": "Aucun événement trouvé pour cette date.",
     "WIKIPEDIA": "Wikipédia",
     "ARIA_LABEL": "Frise chronologique des événements historiques",
+    "PLAY": "Reprendre",
+    "PAUSE": "Pause",
     "IMAGE_ALT": "{{year}} : {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "Novembre",
       "DECEMBER": "Décembre"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Chargement…",

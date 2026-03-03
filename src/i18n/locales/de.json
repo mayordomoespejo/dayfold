@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "Inhaltssprache auswählen"
   },
   "TIMELINE": {
-    "TITLE": "Heute in der Geschichte",
     "TITLE_RELATIVE": "{{label}} in der Geschichte",
     "TITLE_DATE": "{{day}}. {{month}} in der Geschichte",
     "NO_EVENTS": "Für dieses Datum wurden keine Ereignisse gefunden.",
     "WIKIPEDIA": "Wikipedia",
     "ARIA_LABEL": "Zeitleiste historischer Ereignisse",
+    "PLAY": "Fortsetzen",
+    "PAUSE": "Anhalten",
     "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "November",
       "DECEMBER": "Dezember"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Wird geladen…",

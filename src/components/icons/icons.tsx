@@ -1,4 +1,10 @@
-export function DayfoldIcon({ className, title, ...props }) {
+import type { SVGProps } from 'react'
+
+interface IconProps extends SVGProps<SVGSVGElement> {
+  title?: string
+}
+
+export function DayfoldIcon({ className, title, ...props }: IconProps) {
   return (
     <svg
       viewBox="0 -0.5 1001 1001"

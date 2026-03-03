@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "选择内容语言"
   },
   "TIMELINE": {
-    "TITLE": "历史上的今天",
     "TITLE_RELATIVE": "历史上的{{label}}",
     "TITLE_DATE": "历史上的{{month}}{{day}}日",
     "NO_EVENTS": "未找到此日期的事件。",
     "WIKIPEDIA": "维基百科",
     "ARIA_LABEL": "历史事件时间线",
+    "PLAY": "继续",
+    "PAUSE": "暂停",
     "IMAGE_ALT": "{{year}}：{{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "十一月",
       "DECEMBER": "十二月"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "加载中…",

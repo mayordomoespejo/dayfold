@@ -108,7 +108,9 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
       const progress = Math.min(Math.max(-rect.top / travel, 0), 1)
       const maxRotation = (events.length - 1) * FIXED_ANGLE_INCREMENT
 
-      setRotationOffset(progress * maxRotation)
+      const newOffset = progress * maxRotation
+      setRotationOffset(newOffset)
+      document.documentElement.style.setProperty('--wheel-rotation', `${newOffset}rad`)
 
       // Add scrolling class directly (no React state) to suppress CSS transitions while
       // the wheel is moving — transitions fight 60fps updates and cause jank.
@@ -157,13 +159,19 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
     window.addEventListener('resize', handleScroll)
     window.addEventListener('wheel', handleWheelEvent, { passive: false })
 
+    // Capture ref value so the cleanup closure uses the same node that was
+    // mutated during this effect run (avoids the react-hooks/exhaustive-deps
+    // ref-in-cleanup warning).
+    const wheelEl = wheelRef.current
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
       window.removeEventListener('wheel', handleWheelEvent)
       if (snapTimerRef.current) clearTimeout(snapTimerRef.current)
       if (scrollingTimerRef.current) clearTimeout(scrollingTimerRef.current)
-      wheelRef.current?.classList.remove('timeline-wheel--scrolling')
+      wheelEl?.classList.remove('timeline-wheel--scrolling')
+      document.documentElement.style.removeProperty('--wheel-rotation')
     }
   }, [events.length])
 
@@ -413,22 +421,17 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
   }
 
   // ── Active item ───────────────────────────────────────────────────────────
+  // Plain derivation — iterates only visible items (≤ ~15), cost is negligible.
+  // Manual useMemo here would prevent the React Compiler from optimizing this component.
 
-  const activeIndex = useMemo(() => {
-    if (wheelItems.length === 0) return -1
-
-    return (
-      wheelItems.reduce(
-        (closest, item) => {
-          if (!item.isVisible) return closest
-          if (closest === null || item.distanceToArcCenter < closest.distanceToArcCenter)
-            return item
-          return closest
-        },
-        null as WheelItem | null,
-      )?.index ?? 0
-    )
-  }, [wheelItems])
+  let _minDist = Infinity
+  let activeIndex = wheelItems.length === 0 ? -1 : 0
+  for (const item of wheelItems) {
+    if (item.isVisible && item.distanceToArcCenter < _minDist) {
+      _minDist = item.distanceToArcCenter
+      activeIndex = item.index
+    }
+  }
 
   const activeEvent = activeIndex >= 0 ? events[activeIndex] : null
 
@@ -533,8 +536,8 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
                   type="button"
                   className={`timeline-detail__playpause${isAutoPlaying ? ' timeline-detail__playpause--playing' : ''}`}
                   onClick={() => setIsAutoPlaying(p => !p)}
-                  aria-label={isAutoPlaying ? 'Pausar avance' : 'Reanudar avance'}
-                  title={isAutoPlaying ? 'Pausar avance' : 'Reanudar avance'}
+                  aria-label={isAutoPlaying ? t('TIMELINE.PAUSE') : t('TIMELINE.PLAY')}
+                  title={isAutoPlaying ? t('TIMELINE.PAUSE') : t('TIMELINE.PLAY')}
                 >
                   {isAutoPlaying ? <PauseIcon /> : <PlayIcon />}
                 </button>

@@ -4,12 +4,13 @@
     "LANGUAGE_SELECT": "Selecionar idioma do conteúdo"
   },
   "TIMELINE": {
-    "TITLE": "Hoje na história",
     "TITLE_RELATIVE": "{{label}} na história",
     "TITLE_DATE": "{{day}} de {{month}} na história",
     "NO_EVENTS": "Nenhum evento encontrado para esta data.",
     "WIKIPEDIA": "Wikipédia",
     "ARIA_LABEL": "Linha do tempo de eventos históricos",
+    "PLAY": "Retomar",
+    "PAUSE": "Pausa",
     "IMAGE_ALT": "{{year}}: {{text}}"
   },
   "DATE": {
@@ -33,19 +34,6 @@
       "NOVEMBER": "Novembro",
       "DECEMBER": "Dezembro"
     }
-  },
-  "LANGUAGES": {
-    "AR": "العربية",
-    "DE": "Deutsch",
-    "EN": "English",
-    "ES": "Español",
-    "FR": "Français",
-    "IT": "Italiano",
-    "PT": "Português",
-    "SV": "Svenska",
-    "TR": "Türkçe",
-    "UK": "Українська",
-    "ZH": "中文"
   },
   "COMMON": {
     "LOADING": "Carregando…",
