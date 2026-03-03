@@ -19,7 +19,7 @@ export function WheelSkeleton() {
   ]
 
   return (
-    <div className="timeline-shell" aria-busy="true" aria-label={t('COMMON.LOADING')}>
+    <div className="timeline-shell timeline-shell--loading" aria-busy="true" aria-label={t('COMMON.LOADING')}>
       <div className="timeline-stage">
         <div className="timeline-stage__grid">
           <div className="timeline-wheel">

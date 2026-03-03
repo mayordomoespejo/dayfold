@@ -21,6 +21,13 @@
   height: var(--shell-height, auto);
 }
 
+.timeline-shell--loading {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 .timeline-stage {
   position: sticky;
   top: var(--header-height);
