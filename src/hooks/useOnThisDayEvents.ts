@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useContentLang } from '@/context/ContentLangContext'
+import { useContentLang } from '@/context/useContentLang'
 import { fetchOnThisDayEvents } from '@/services/wikimediaClient'
 
 /**

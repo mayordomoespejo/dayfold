@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { CalendarDate } from '@/types'
 import { clampDay, getDaysInMonth, getTodayDate } from '@/utils/date'
@@ -21,15 +21,8 @@ const MONTH_KEYS = [
 export function DateSelector({ month, day, onChange, compact = false }: Props) {
   const { t } = useTranslation()
 
-  // Internal pending state — only committed to the parent on submit
   const [localMonth, setLocalMonth] = useState(month)
   const [localDay, setLocalDay] = useState(day)
-
-  // Sync when parent resets (e.g. Today button commits directly)
-  useEffect(() => {
-    setLocalMonth(month)
-    setLocalDay(day)
-  }, [month, day])
 
   const isDirty = localMonth !== month || localDay !== day
 

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@/hooks/useTheme'
 import { useTimelineDate } from '@/hooks/useTimelineDate'
-import { useContentLang } from '@/context/ContentLangContext'
+import { useContentLang } from '@/context/useContentLang'
 import { CONTENT_LANGS } from '@/config/langs'
 import { DateSelector } from '@/components/DateSelector/DateSelector'
 import { Dropdown } from '@/components/common/Dropdown'
@@ -49,7 +49,13 @@ export function Header() {
         </div>
 
         <div className="header__actions">
-          <DateSelector month={date.month} day={date.day} onChange={setDate} compact />
+          <DateSelector
+            key={`${date.month}-${date.day}`}
+            month={date.month}
+            day={date.day}
+            onChange={setDate}
+            compact
+          />
 
           <div className="header__divider" aria-hidden="true" />
 

@@ -13,17 +13,9 @@
   --color-text-muted: #6b6560;
   --color-text-on-primary: #ffffff;
 
-  --color-success: #2e7d50;
   --color-error: #b91c1c;
-  --color-warning: #d97706;
 
-  --color-timeline-line: var(--color-primary);
-  --color-timeline-dot: var(--color-primary);
-  --color-timeline-dot-bg: var(--color-surface);
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -42,7 +34,6 @@
   --space-16: 64px;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -59,14 +50,11 @@
   --line-height-base: 1.5;
   --line-height-relaxed: 1.75;
 
-  --max-width: 900px;
   --header-height: 72px;
 
   --z-base: 0;
   --z-above: 10;
   --z-header: 100;
-  --z-modal: 200;
-  --z-toast: 300;
 
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
@@ -87,7 +75,5 @@
   --color-primary-hover: #e0bb70;
   --color-primary-muted: rgba(212, 168, 80, 0.15);
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }

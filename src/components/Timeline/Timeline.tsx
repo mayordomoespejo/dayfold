@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react'
+import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent, PointerEvent as ReactPointerEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TimelineEvent } from '@/types'
 import { WheelSkeleton } from '@/components/common/Skeleton'
@@ -241,6 +241,20 @@ export function Timeline({ events, isLoading, isError, onRetry }: Props) {
     }, 0)
   }
 
+  const handleWheelKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return
+    if (events.length === 0) return
+
+    event.preventDefault()
+
+    const direction = event.key === 'ArrowDown' ? 1 : -1
+    const baseIndex = activeIndex >= 0 ? activeIndex : 0
+    const targetIndex = Math.min(events.length - 1, Math.max(0, baseIndex + direction))
+
+    if (targetIndex === baseIndex) return
+    scrollToActivePosition(targetIndex)
+  }
+
   const activeIndex = useMemo(() => {
     if (wheelItems.length === 0) return -1
 
@@ -283,6 +297,8 @@ export function Timeline({ events, isLoading, isError, onRetry }: Props) {
             ref={wheelRef}
             className="timeline-wheel"
             aria-label={t('TIMELINE.ARIA_LABEL')}
+            tabIndex={0}
+            onKeyDown={handleWheelKeyDown}
             onPointerDown={handleWheelPointerDown}
             onPointerMove={handleWheelPointerMove}
             onPointerUp={handleWheelPointerEnd}
