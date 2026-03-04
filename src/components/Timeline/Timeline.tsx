@@ -180,8 +180,10 @@ export function Timeline({ events, isLoading, isError, onRetry, title }: Props) 
   // (e.g. the detail card), so pointerdown on the wheel never fires.
 
   useEffect(() => {
-    const onTouchStart = () => {
+    const onTouchStart = (e: TouchEvent) => {
       if (autoRotateActiveRef.current) {
+        // Skip if the user is tapping the play/pause button — its onClick handles the state.
+        if ((e.target as HTMLElement).closest('.timeline-detail__playpause')) return
         autoRotateActiveRef.current = false
         setIsAutoPlaying(false)
       }
